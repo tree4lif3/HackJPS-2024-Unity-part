@@ -44,7 +44,7 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 493788726824144810}
-    m_Position: {x: 20, y: 240, z: 0}
+    m_Position: {x: 20, y: 250, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -149,6 +149,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Back Button
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: ControlButton
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7617298034648757470}
   m_Solo: 0
@@ -200,6 +203,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: ControlButton
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Back Button
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4400903072558382512}
