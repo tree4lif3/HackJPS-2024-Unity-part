@@ -47,4 +47,7 @@ public class SwitchScene : MonoBehaviour
     {
         SceneManager.LoadScene("Trading Bot");
     }
+    public void TradingBack() {
+        SceneManager.LoadScene("Main Menu");
+    }
 }
