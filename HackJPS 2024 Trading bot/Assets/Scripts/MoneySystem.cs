@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 using TMPro;
 
 public class MoneySystem : MonoBehaviour
@@ -12,11 +13,25 @@ public class MoneySystem : MonoBehaviour
     private float distance = 100f;
     [SerializeField] private LayerMask mask;
     private int stockBuySellAmount = 50;
+    private int currentStocksHeld = 0;
+    private int currentStockPrice = 0;
+    private int currentEntry = 0;
+    private string[,] tokens = new string[619040, 8];
 
     // Start is called before the first frame update
     void Start()
     {
         moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
+
+        TextReader reader = File.OpenText("Assets/all_stocks_5yr.csv");
+        for(int i = 0; i < 619040;  i++)
+        {
+            for(int j = 0; j < 8;  j++)
+            {
+                string line = reader.ReadLine();
+                tokens[i, j] = line.Split(',')[j];
+            }
+        }
     }
 
     // Update is called once per frame
@@ -47,13 +62,20 @@ public class MoneySystem : MonoBehaviour
 
     public void Buy(TMP_Text moneyLeft, int money)
     {
-        this.money -= stockBuySellAmount;
+        this.money -= stockBuySellAmount * currentStockPrice;
         moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
+        currentStocksHeld += stockBuySellAmount;
     }
 
     public void Sell(TMP_Text moneyLeft, int money)
     {
-        this.money += stockBuySellAmount;
+        this.money += stockBuySellAmount * currentStockPrice;
         moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
+        currentStocksHeld -= stockBuySellAmount;
+    }
+
+    private void DisplayEntry(int entryNumber)
+    {
+
     }
 }
