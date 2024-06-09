@@ -22,6 +22,8 @@ public class MoneySystem : MonoBehaviour
     private int currentEntry = 1;
     private List<string[]> tokens;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,8 @@ public class MoneySystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+       
         if(Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo;

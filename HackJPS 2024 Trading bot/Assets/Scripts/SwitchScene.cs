@@ -43,5 +43,8 @@ public class SwitchScene : MonoBehaviour
         loadText.SetActive(true);
         SceneManager.LoadScene("Business Game");
     }
-
+    public void TradingBot()
+    {
+        SceneManager.LoadScene("Trading Bot");
+    }
 }

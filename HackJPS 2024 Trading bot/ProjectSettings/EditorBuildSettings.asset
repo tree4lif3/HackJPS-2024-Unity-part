@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Business Game.unity
     guid: 7e6a7342ddb96eb45b669c4904ba1e7b
   - enabled: 0
-    path: Assets/Scenes/Controls.unity
+    path: 
     guid: 3c190ac72884a1d4e825d83848e8593e
+  - enabled: 1
+    path: Assets/Scenes/Trading Bot.unity
+    guid: 5fbf07e157b054e43a2edc2f62668561
   m_configObjects: {}

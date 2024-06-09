@@ -1,20 +1,23 @@
-/*using System.Diagnostics;
+using System.Diagnostics;
 using System.IO;
 using System;
-
-void run_cmd(string cmd, string args)
+using UnityEngine;
+public class PythonConverter : MonoBehaviour
 {
-    ProcessStartInfo start = new ProcessStartInfo();
-    start.FileName = "my/full/path/to/python.exe";
-    start.Arguments = string.Format("{0} {1}", cmd, args);
-    start.UseShellExecute = false;
-    start.RedirectStandardOutput = true;
-    using (Process process = Process.Start(start))
+    void run_cmd(string cmd, string args)
     {
-        using (StreamReader reader = process.StandardOutput)
+        ProcessStartInfo start = new ProcessStartInfo();
+        start.FileName = "Assets/Scripts/aneeshbrainfart.exe";
+        start.Arguments = string.Format("{0} {1}", cmd, args);
+        start.UseShellExecute = false;
+        start.RedirectStandardOutput = true;
+        using (Process process = Process.Start(start))
         {
-            string result = reader.ReadToEnd();
-            Console.Write(result);
+            using (StreamReader reader = process.StandardOutput)
+            {
+                string result = reader.ReadToEnd();
+                Console.Write(result);
+            }
         }
     }
-}*/
+}
