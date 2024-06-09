@@ -9,7 +9,8 @@ public class MoneySystem : MonoBehaviour
     public TMP_Text moneyLeft;
     public int money = 10000;
     public Camera cam;
-    private RaycastHit hitinfo;
+    private RaycastHit hitInfo;
+    private float distance = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +23,19 @@ public class MoneySystem : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Physics.Raycast(transform.position + cam.transform.position, cam.transform.forward, out hitinfo, 100f);
-            print(hitinfo);
+            Ray ray = new Ray(transform.position + cam.transform.localPosition, cam.transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction * distance);
+            Physics.Raycast(ray, out hitInfo, distance);
+            print(hitInfo);
             print(cam.transform.forward);
             print("1");
-            if(hitinfo.rigidbody.gameObject.tag == "Buy")
+            if(hitInfo.rigidbody.gameObject.tag == "Buy")
             {
-                hitinfo.rigidbody.gameObject.GetComponent<Reciever>().Buy(moneyLeft, money);
+                hitInfo.rigidbody.gameObject.GetComponent<Reciever>().Buy(moneyLeft, money);
             }
-            else if(hitinfo.rigidbody.gameObject.tag == "Sell")
+            else if(hitInfo.rigidbody.gameObject.tag == "Sell")
             {
-                hitinfo.rigidbody.gameObject.GetComponent<Reciever>().Sell(moneyLeft, money);
+                hitInfo.rigidbody.gameObject.GetComponent<Reciever>().Sell(moneyLeft, money);
             }
         }
     }

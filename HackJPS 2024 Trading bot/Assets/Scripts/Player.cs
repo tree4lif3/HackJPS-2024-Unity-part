@@ -17,5 +17,10 @@ public class Player : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
 
         controller.Move(move * speed * Time.deltaTime);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            controller.Move(Vector3.up * Time.deltaTime);
+        }
     }
 }
