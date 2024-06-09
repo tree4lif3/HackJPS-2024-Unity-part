@@ -9,10 +9,13 @@ public class SwitchScene : MonoBehaviour
     public GameObject mainMenu;
     public GameObject controls;
 
+    public GameObject loadText;
+
     private void Start()
     {
         controls.SetActive(false);
         mainMenu.SetActive(true);
+        loadText.SetActive(false);
 
         animator.SetBool("Back Button", false);
         animator.SetBool("ControlButton", false);
@@ -37,6 +40,7 @@ public class SwitchScene : MonoBehaviour
     }
     public void BusinessGame()
     {
+        loadText.SetActive(true);
         SceneManager.LoadScene("Business Game");
     }
 
