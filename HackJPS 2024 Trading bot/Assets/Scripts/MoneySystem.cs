@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public class MoneySystem : MonoBehaviour
 {
@@ -17,14 +20,14 @@ public class MoneySystem : MonoBehaviour
     private int currentStocksHeld = 0;
     private int currentStockPrice = 0;
     private int currentEntry = 0;
-    private string[,] tokens = new string[619040, 8];
+    private List<string[]> tokens;
 
     // Start is called before the first frame update
     void Start()
     {
         moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
 
-        TextReader reader = File.OpenText("Assets/all_stocks_5yr.csv");
+        /*TextReader reader = File.OpenText("Assets/all_stocks_5yr.csv");
         for(int i = 0; i < 619040;  i++)
         {
             for(int j = 0; j < 8;  j++)
@@ -32,7 +35,10 @@ public class MoneySystem : MonoBehaviour
                 string line = reader.ReadLine();
                 tokens[i, j] = line.Split(',')[j];
             }
-        }
+        }*/
+
+        tokens = GetCsvContent("Assets/all_stocks_5yr.csv");
+        currentStockPrice = Int32.Parse(tokens[0][0]);
     }
 
     // Update is called once per frame
@@ -47,11 +53,13 @@ public class MoneySystem : MonoBehaviour
             {
                 if (hitInfo.rigidbody.gameObject.tag == "Buy")
                 {
+                    print("buy");
                     Buy(moneyLeft, money);
                     DisplayEntry(currentEntry);
                 }
                 else if (hitInfo.rigidbody.gameObject.tag == "Sell")
                 {
+                    print("sell");
                     Sell(moneyLeft, money);
                     DisplayEntry(currentEntry);
                 }
@@ -91,5 +99,22 @@ public class MoneySystem : MonoBehaviour
     {
         
         currentEntry++;
+    }
+
+    public List<string[]> GetCsvContent(string iFileName)
+    {
+        var table = new List<string[]>();
+        using (var r = new StreamReader(iFileName))
+        {
+            while (!r.EndOfStream)
+            {
+                string line = r.ReadLine();
+                table.Add(Regex.Split(line, @"\s|[;]|[,]"));
+            }
+
+            r.Close();
+        }
+
+        return table;
     }
 }
