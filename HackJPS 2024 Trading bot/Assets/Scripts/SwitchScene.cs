@@ -12,7 +12,11 @@ public class SwitchScene : MonoBehaviour
     }
     public void Back()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Main Menu");
+    }
+    public void BusinessGame()
+    {
+        SceneManager.LoadScene("Business Game");
     }
 
 }
