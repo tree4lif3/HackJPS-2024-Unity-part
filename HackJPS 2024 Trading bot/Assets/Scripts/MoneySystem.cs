@@ -9,8 +9,9 @@ public class MoneySystem : MonoBehaviour
     public TMP_Text moneyLeft;
     public int money = 10000;
     public Camera cam;
-    private RaycastHit hitInfo;
-    private float distance = 3f;
+    private float distance = 100f;
+    [SerializeField] private LayerMask mask;
+    private int stockBuySellAmount = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -19,24 +20,36 @@ public class MoneySystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Ray ray = new Ray(transform.position + cam.transform.localPosition, cam.transform.forward);
+            RaycastHit hitInfo;
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             Debug.DrawRay(ray.origin, ray.direction * distance);
-            Physics.Raycast(ray, out hitInfo, distance);
-            print(hitInfo);
-            print(cam.transform.forward);
-            print("1");
-            if(hitInfo.rigidbody.gameObject.tag == "Buy")
+            if(Physics.Raycast(ray, out hitInfo, distance, mask))
             {
-                hitInfo.rigidbody.gameObject.GetComponent<Reciever>().Buy(moneyLeft, money);
-            }
-            else if(hitInfo.rigidbody.gameObject.tag == "Sell")
-            {
-                hitInfo.rigidbody.gameObject.GetComponent<Reciever>().Sell(moneyLeft, money);
+                if (hitInfo.rigidbody.gameObject.tag == "Buy")
+                {
+                    Buy(moneyLeft, money);
+                }
+                else if (hitInfo.rigidbody.gameObject.tag == "Sell")
+                {
+                    Sell(moneyLeft, money);
+                }
             }
         }
+    }
+
+    public void Buy(TMP_Text moneyLeft, int money)
+    {
+        this.money -= stockBuySellAmount;
+        moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
+    }
+
+    public void Sell(TMP_Text moneyLeft, int money)
+    {
+        this.money += stockBuySellAmount;
+        moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
     }
 }
