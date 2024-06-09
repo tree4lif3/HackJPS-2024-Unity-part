@@ -8,11 +8,12 @@ using TMPro;
 public class MoneySystem : MonoBehaviour
 {
     public TMP_Text moneyLeft;
+    public TMP_Text stockAmounts;
     public int money = 10000;
     public Camera cam;
     private float distance = 100f;
     [SerializeField] private LayerMask mask;
-    private int stockBuySellAmount = 50;
+    private int stockBuySellAmount = 0;
     private int currentStocksHeld = 0;
     private int currentStockPrice = 0;
     private int currentEntry = 0;
@@ -51,6 +52,16 @@ public class MoneySystem : MonoBehaviour
                 else if (hitInfo.rigidbody.gameObject.tag == "Sell")
                 {
                     Sell(moneyLeft, money);
+                }
+                else if(hitInfo.rigidbody.gameObject.tag == "More")
+                {
+                    stockBuySellAmount++;
+                    stockAmounts.text = stockBuySellAmount.ToString();
+                }
+                else if (hitInfo.rigidbody.gameObject.tag == "Less")
+                {
+                    stockBuySellAmount--;
+                    stockAmounts.text = stockBuySellAmount.ToString();
                 }
                 else
                 {

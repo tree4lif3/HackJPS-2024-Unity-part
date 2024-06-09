@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Sell
   - Buy
+  - More
+  - Less
   layers:
   - Default
   - TransparentFX
