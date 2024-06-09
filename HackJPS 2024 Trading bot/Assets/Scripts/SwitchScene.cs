@@ -16,13 +16,11 @@ public class SwitchScene : MonoBehaviour
     // Start is called before the first frame update
     public void Controls()
     {
-        mainMenu.SetActive(false);
-        controls.SetActive(true);
+        SceneManager.LoadScene("Controls");
     }
     public void Back()
     {
-        controls.SetActive(false);
-        mainMenu.SetActive(true);
+        SceneManager.LoadScene("Main Menu");
     }
     public void BusinessGame()
     {
