@@ -37,6 +37,10 @@ public class MoneySystem : MonoBehaviour
                 {
                     Sell(moneyLeft, money);
                 }
+                else
+                {
+                    Buy(moneyLeft, 0);
+                }
             }
         }
     }
