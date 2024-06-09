@@ -48,10 +48,12 @@ public class MoneySystem : MonoBehaviour
                 if (hitInfo.rigidbody.gameObject.tag == "Buy")
                 {
                     Buy(moneyLeft, money);
+                    DisplayEntry(currentEntry);
                 }
                 else if (hitInfo.rigidbody.gameObject.tag == "Sell")
                 {
                     Sell(moneyLeft, money);
+                    DisplayEntry(currentEntry);
                 }
                 else if (hitInfo.rigidbody.gameObject.tag == "More")
                 {
@@ -87,6 +89,7 @@ public class MoneySystem : MonoBehaviour
 
     private void DisplayEntry(int entryNumber)
     {
-
+        
+        currentEntry++;
     }
 }
