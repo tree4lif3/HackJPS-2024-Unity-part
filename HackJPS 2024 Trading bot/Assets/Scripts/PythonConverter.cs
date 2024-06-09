@@ -1,4 +1,4 @@
-using System.Diagnostics;
+/*using System.Diagnostics;
 using System.IO;
 using System;
 
@@ -17,4 +17,4 @@ void run_cmd(string cmd, string args)
             Console.Write(result);
         }
     }
-}
+}*/
