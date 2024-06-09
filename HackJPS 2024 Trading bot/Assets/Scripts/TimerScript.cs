@@ -8,10 +8,12 @@ public class TimerScript : MonoBehaviour
     public bool TimerOn = false;
 
     public TextMeshPro TimerTxt;
+    public GameObject timesup;
 
     void Start()
     {
         TimerOn = true;
+        timesup.SetActive(false);
     }
 
     void Update()
@@ -25,9 +27,12 @@ public class TimerScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("Time is UP!");
+                Debug.Log("Time is up!");
                 TimeLeft = 0;
                 TimerOn = false;
+
+                timesup.SetActive(true);
+                Time.timeScale = 0;
             }
         }
     }
