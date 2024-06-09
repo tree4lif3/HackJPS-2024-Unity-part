@@ -12,20 +12,20 @@ public class MoneySystem : MonoBehaviour
 {
     public TMP_Text moneyLeft;
     public TMP_Text stockAmounts;
-    public int money = 10000;
+    public float money = 10000f;
     public Camera cam;
     private float distance = 100f;
     [SerializeField] private LayerMask mask;
-    private int stockBuySellAmount = 0;
-    private int currentStocksHeld = 0;
-    private int currentStockPrice = 0;
-    private int currentEntry = 0;
+    private float stockBuySellAmount = 0f;
+    private float currentStocksHeld = 0f;
+    private float currentStockPrice = 0f;
+    private int currentEntry = 1;
     private List<string[]> tokens;
 
     // Start is called before the first frame update
     void Start()
     {
-        moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
+        moneyLeft.text = "Money Left(Bank): $10000 (Stock): $0 Total: $10000";
 
         /*TextReader reader = File.OpenText("Assets/all_stocks_5yr.csv");
         for(int i = 0; i < 619040;  i++)
@@ -38,7 +38,7 @@ public class MoneySystem : MonoBehaviour
         }*/
 
         tokens = GetCsvContent("Assets/all_stocks_5yr.csv");
-        currentStockPrice = Int32.Parse(tokens[0][0]);
+        currentStockPrice = float.Parse(tokens[currentEntry][1]);
     }
 
     // Update is called once per frame
@@ -81,24 +81,24 @@ public class MoneySystem : MonoBehaviour
         }
     }
 
-    public void Buy(TMP_Text moneyLeft, int money)
+    public void Buy(TMP_Text moneyLeft, float money)
     {
         this.money -= stockBuySellAmount * currentStockPrice;
-        moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
         currentStocksHeld += stockBuySellAmount;
+        moneyLeft.text = "Money Left(Bank): $" + this.money + " (Stock): $" + currentStocksHeld * currentStockPrice + " Total: $" + this.money + currentStocksHeld * currentStockPrice;
     }
 
-    public void Sell(TMP_Text moneyLeft, int money)
+    public void Sell(TMP_Text moneyLeft, float money)
     {
         this.money += stockBuySellAmount * currentStockPrice;
-        moneyLeft.text = "Money Left(Bank and Stock Value): $" + money;
         currentStocksHeld -= stockBuySellAmount;
+        moneyLeft.text = "Money Left(Bank): $" + this.money + " (Stock): $" + currentStocksHeld * currentStockPrice + " Total: $" + this.money + currentStocksHeld * currentStockPrice;
     }
 
     private void DisplayEntry(int entryNumber)
     {
-        
         currentEntry++;
+        currentStockPrice = float.Parse(tokens[currentEntry][1]);
     }
 
     public List<string[]> GetCsvContent(string iFileName)
