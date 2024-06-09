@@ -51,16 +51,16 @@ public class MoneySystem : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * distance);
             if(Physics.Raycast(ray, out hitInfo, distance, mask))
             {
-                if (hitInfo.rigidbody.gameObject.tag == "Buy")
+                if (hitInfo.rigidbody.gameObject.tag == "Buy" && stockBuySellAmount != 0)
                 {
                     print("buy");
-                    Buy(moneyLeft, money);
+                    Buy(moneyLeft);
                     DisplayEntry(currentEntry);
                 }
-                else if (hitInfo.rigidbody.gameObject.tag == "Sell")
+                else if (hitInfo.rigidbody.gameObject.tag == "Sell" && stockBuySellAmount != 0)
                 {
                     print("sell");
-                    Sell(moneyLeft, money);
+                    Sell(moneyLeft);
                     DisplayEntry(currentEntry);
                 }
                 else if (hitInfo.rigidbody.gameObject.tag == "More")
@@ -68,31 +68,31 @@ public class MoneySystem : MonoBehaviour
                     stockBuySellAmount++;
                     stockAmounts.text = stockBuySellAmount.ToString();
                 }
-                else if (hitInfo.rigidbody.gameObject.tag == "Less")
+                else if (hitInfo.rigidbody.gameObject.tag == "Less" && stockBuySellAmount != 0)
                 {
                     stockBuySellAmount--;
                     stockAmounts.text = stockBuySellAmount.ToString();
                 }
                 else
                 {
-                    Buy(moneyLeft, 0);
+                    Buy(moneyLeft);
                 }
             }
         }
     }
 
-    public void Buy(TMP_Text moneyLeft, float money)
+    public void Buy(TMP_Text moneyLeft)
     {
         this.money -= stockBuySellAmount * currentStockPrice;
         currentStocksHeld += stockBuySellAmount;
-        moneyLeft.text = "Money Left(Bank): $" + this.money + " (Stock): $" + currentStocksHeld * currentStockPrice + " Total: $" + this.money + currentStocksHeld * currentStockPrice;
+        moneyLeft.text = "Money Left(Bank): $" + this.money + " (Stock): $" + currentStocksHeld * currentStockPrice + " Total: $" + (this.money + currentStocksHeld * currentStockPrice);
     }
 
-    public void Sell(TMP_Text moneyLeft, float money)
+    public void Sell(TMP_Text moneyLeft)
     {
         this.money += stockBuySellAmount * currentStockPrice;
         currentStocksHeld -= stockBuySellAmount;
-        moneyLeft.text = "Money Left(Bank): $" + this.money + " (Stock): $" + currentStocksHeld * currentStockPrice + " Total: $" + this.money + currentStocksHeld * currentStockPrice;
+        moneyLeft.text = "Money Left(Bank): $" + this.money + " (Stock): $" + currentStocksHeld * currentStockPrice + " Total: $" + (this.money + currentStocksHeld * currentStockPrice);
     }
 
     private void DisplayEntry(int entryNumber)
